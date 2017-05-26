@@ -390,10 +390,10 @@
                 
                   <h1>Job</h1>
                 
-                <div class="codehilite"><pre><span></span>Job(name, executable, error=None, log=None, output=None, submit=cwd,
-    request_memory=None, request_disk=None, request_cpus=None, getenv=True,
-    universe=&#39;vanilla&#39;, initialdir=None, notification=&#39;never&#39;, requirements=None,
-    queue=None, extra_lines=None, use_unique_id=False, verbose=0)
+                <div class="codehilite"><pre><span></span><span class="n">Job</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">executable</span><span class="p">,</span> <span class="n">error</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">log</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">submit</span><span class="o">=</span><span class="n">cwd</span><span class="p">,</span>
+    <span class="n">request_memory</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request_disk</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">request_cpus</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">getenv</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+    <span class="n">universe</span><span class="o">=</span><span class="s1">&#39;vanilla&#39;</span><span class="p">,</span> <span class="n">initialdir</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">notification</span><span class="o">=</span><span class="s1">&#39;never&#39;</span><span class="p">,</span> <span class="n">requirements</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span>
+    <span class="n">queue</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">extra_lines</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 
 
@@ -466,11 +466,6 @@
 <p>List of additional lines to be added to submit file.</p>
 </li>
 <li>
-<p><code>use_unique_id</code> : <code>bool</code> (default: <code>False</code>)</p>
-<p><em>(Added in version 0.1.1)</em></p>
-<p>Option to have a separate set of error, output, and log files for each argument in Job.</p>
-</li>
-<li>
 <p><code>verbose</code> : <code>int</code> (default: 0)</p>
 <p>Level of logging verbosity.</p>
 <ul>
@@ -504,6 +499,20 @@
 <li>
 <p><code>arg</code> : <code>str</code></p>
 <p>Argument to append to Job <code>args</code> list.</p>
+</li>
+<li>
+<p><code>name</code> : <code>str</code> (default: <code>None</code>)</p>
+<p><em>(Added in version 0.1.2)</em></p>
+<p>Option to specify a name related to this argument. If a name is
+specified, then a separate set of log, output, and error files will
+be generated for this particular argument.  </p>
+</li>
+<li>
+<p><code>retry</code> : <code>int</code> (default: <code>None</code>)</p>
+<p><em>(Added in version 0.1.2)</em></p>
+<p>Option to specify the number of times to retry this node. Default
+number of retries is 0. <em>Note</em>: this feature is only available to
+Jobs that are submitted via a Dagman.</p>
 </li>
 </ul>
 <p><em>Returns:</em></p>
