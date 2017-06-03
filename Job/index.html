@@ -48,7 +48,7 @@
   
   
   
-    <body data-md-color-primary="teal" data-md-color-accent="green">
+    <body data-md-color-primary="green" data-md-color-accent="blue">
   
     <svg class="md-svg">
       <defs>
@@ -483,11 +483,11 @@
 </li>
 <li>
 <p><code>parents</code> : <code>list</code> (default: <code>[]</code>)</p>
-<p><em>Only applies when Job is in a Dagman</em>. List of parent Jobs. Dagman will ensure that Jobs in the parents list will complete before this Job is submitted to HTCondor.</p>
+<p><em>Only applies when Job is in a Dagman</em>. List of parent Jobs and Dagmans. Ensures that Jobs and other Dagmans in the parents list will complete before this Job is submitted to HTCondor.</p>
 </li>
 <li>
 <p><code>children</code> : <code>list</code> (default: <code>[]</code>)</p>
-<p><em>Only applies when Job is in a Dagman</em>. List of child Jobs. Dagman will ensure that Jobs in the children list will be submitted to HTCondor only after this Job has completed.</p>
+<p><em>Only applies when Job is in a Dagman</em>. List of child Jobs and Dagmans. Ensures that Jobs and other Dagmans in the children list will be submitted after this Job is has completed.</p>
 </li>
 </ul>
 <h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
@@ -524,29 +524,29 @@ Jobs that are submitted via a Dagman.</p>
 </ul>
 </li>
 <li>
-<p><code>add_parent(job)</code></p>
+<p><code>add_parent(object)</code></p>
 <p><em>Parameters:</em></p>
 <ul>
 <li>
-<p><code>job</code> : <code>Job</code></p>
-<p>Job to append to the <code>parents</code> list.</p>
+<p><code>object</code> : <code>Job</code>, <code>Dagman</code></p>
+<p>Job or Dagman to append to the <code>parents</code> list.</p>
 </li>
 </ul>
 <p><em>Returns:</em></p>
 <ul>
 <li>
-<p><code>self</code> : <code>Job</code></p>
+<p><code>self</code> : <code>Job</code>, <code>Dagman</code></p>
 <p>Returns self.</p>
 </li>
 </ul>
 </li>
 <li>
-<p><code>add_child(job)</code></p>
+<p><code>add_child(object)</code></p>
 <p><em>Parameters:</em></p>
 <ul>
 <li>
-<p><code>job</code> : <code>Job</code></p>
-<p>Job to append to the <code>children</code> list.</p>
+<p><code>object</code> : <code>Job</code></p>
+<p>Job or Dagman to append to the <code>children</code> list.</p>
 </li>
 </ul>
 <p><em>Returns:</em></p>

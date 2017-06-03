@@ -48,7 +48,7 @@
   
   
   
-    <body data-md-color-primary="teal" data-md-color-accent="green">
+    <body data-md-color-primary="green" data-md-color-accent="blue">
   
     <svg class="md-svg">
       <defs>
@@ -394,7 +394,7 @@
 </pre></div>
 
 
-<p>The <code>Dagman</code> object acts as a container for <code>Job</code> objects. <code>Dagman</code> objects also handle any inter-job dependencies, such as parent-child relationships between jobs.</p>
+<p>The <code>Dagman</code> object acts as a container for <code>Job</code>  and other <code>Dagman</code> objects. <code>Dagman</code> objects also handle any inter-job dependencies, such as parent-child relationships between <code>Jobs</code> and other <code>Dagmans</code>.</p>
 <h3 id="parameters">Parameters<a class="headerlink" href="#parameters" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
@@ -423,8 +423,18 @@
 <h3 id="attributes">Attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h3>
 <ul>
 <li>
-<p><code>jobs</code> : <code>list</code> (default: <code>[]</code>)</p>
-<p>List of Job objects to be included in DAGMan submit file.</p>
+<p><code>nodes</code> : <code>list</code> (default: <code>[]</code>)</p>
+<p>List of Job and other Dagman objects to be included in Dagman submit file.</p>
+</li>
+<li>
+<p><code>parents</code> : <code>list</code> (default: <code>[]</code>)</p>
+<p><em>(Added in version 0.1.3)</em></p>
+<p>List of parent Jobs and Dagmans. Ensures that Jobs and other Dagmans in the parents list will complete before this Dagman is submitted to HTCondor.</p>
+</li>
+<li>
+<p><code>children</code> : <code>list</code> (default: <code>[]</code>)</p>
+<p><em>(Added in version 0.1.3)</em></p>
+<p>List of children Jobs and Dagmans. Ensures that Jobs and other Dagmans in the children list will be submitted after this Dagman is has completed.</p>
 </li>
 </ul>
 <h3 id="methods">Methods<a class="headerlink" href="#methods" title="Permanent link">&para;</a></h3>
@@ -435,7 +445,58 @@
 <ul>
 <li>
 <p><code>job</code> : <code>Job</code></p>
-<p>Job to append to the <code>jobs</code> list.</p>
+<p>Job to append to the <code>nodes</code> list.</p>
+</li>
+</ul>
+<p><em>Returns:</em></p>
+<ul>
+<li>
+<p><code>self</code> : <code>Dagman</code></p>
+<p>Returns self.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>add_subdag(dag)</code></p>
+<p><em>Parameters:</em></p>
+<ul>
+<li>
+<p><code>dag</code> : <code>Dagman</code></p>
+<p>Dagman to append to the <code>nodes</code> list.</p>
+</li>
+</ul>
+<p><em>Returns:</em></p>
+<ul>
+<li>
+<p><code>self</code> : <code>Dagman</code></p>
+<p>Returns self.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>add_parent(object)</code></p>
+<p><em>Parameters:</em></p>
+<ul>
+<li>
+<p><code>object</code> : <code>Job</code>, <code>Dagman</code></p>
+<p>Job or Dagman to append to the <code>parents</code> list.</p>
+</li>
+</ul>
+<p><em>Returns:</em></p>
+<ul>
+<li>
+<p><code>self</code> : <code>Job</code>, <code>Dagman</code></p>
+<p>Returns self.</p>
+</li>
+</ul>
+</li>
+<li>
+<p><code>add_child(object)</code></p>
+<p><em>Parameters:</em></p>
+<ul>
+<li>
+<p><code>object</code> : <code>Job</code></p>
+<p>Job or Dagman to append to the <code>children</code> list.</p>
 </li>
 </ul>
 <p><em>Returns:</em></p>
@@ -462,7 +523,7 @@
 <p><em>Returns:</em></p>
 <ul>
 <li>
-<p><code>self</code> : <code>Job</code></p>
+<p><code>self</code> : <code>Dagman</code></p>
 <p>Returns self.</p>
 </li>
 </ul>
