@@ -337,6 +337,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#a-dagman-within-a-dagman" title="A Dagman within a Dagman" class="md-nav__link">
+    A Dagman within a Dagman
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -428,6 +435,13 @@
           <li class="md-nav__item">
   <a href="#add-inter-job-dependencies" title="Add inter-job dependencies" class="md-nav__link">
     Add inter-job dependencies
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-dagman-within-a-dagman" title="A Dagman within a Dagman" class="md-nav__link">
+    A Dagman within a Dagman
   </a>
   
 </li>
@@ -557,6 +571,57 @@
 <span class="c1"># Add jobs to dagman</span>
 <span class="n">dagman</span><span class="o">.</span><span class="n">add_job</span><span class="p">(</span><span class="n">job1</span><span class="p">)</span>
 <span class="n">dagman</span><span class="o">.</span><span class="n">add_job</span><span class="p">(</span><span class="n">job2</span><span class="p">)</span>
+<span class="c1"># Write all necessary submit files and submit job to Condor</span>
+<span class="n">dagman</span><span class="o">.</span><span class="n">build_submit</span><span class="p">()</span>
+</pre></div>
+
+
+<h3 id="a-dagman-within-a-dagman">A Dagman within a Dagman<a class="headerlink" href="#a-dagman-within-a-dagman" title="Permanent link">&para;</a></h3>
+<div class="codehilite"><pre><span></span><span class="c1"># Declare the error, output, log, and submit directories for Condor Job</span>
+<span class="n">error</span> <span class="o">=</span> <span class="s1">&#39;condor/error&#39;</span>
+<span class="n">output</span> <span class="o">=</span> <span class="s1">&#39;condor/output&#39;</span>
+<span class="n">log</span> <span class="o">=</span> <span class="s1">&#39;condor/log&#39;</span>
+<span class="n">submit</span> <span class="o">=</span> <span class="s1">&#39;condor/submit&#39;</span>
+
+<span class="c1"># Setting up first PyCondor Job</span>
+<span class="n">job1</span> <span class="o">=</span> <span class="n">pycondor</span><span class="o">.</span><span class="n">Job</span><span class="p">(</span><span class="s1">&#39;examplejob1&#39;</span><span class="p">,</span> <span class="s1">&#39;savelist.py&#39;</span><span class="p">,</span>
+               <span class="n">error</span><span class="o">=</span><span class="n">error</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
+               <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span> <span class="n">submit</span><span class="o">=</span><span class="n">submit</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Adding arguments to job1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">10</span><span class="p">):</span>
+    <span class="n">job1</span><span class="o">.</span><span class="n">add_arg</span><span class="p">(</span><span class="s1">&#39;--length {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">i</span><span class="p">),</span> <span class="n">retry</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+
+<span class="c1"># Setting up second PyCondor Job</span>
+<span class="n">job2</span> <span class="o">=</span> <span class="n">pycondor</span><span class="o">.</span><span class="n">Job</span><span class="p">(</span><span class="s1">&#39;examplejob2&#39;</span><span class="p">,</span> <span class="s1">&#39;savelist.py&#39;</span><span class="p">,</span>
+               <span class="n">error</span><span class="o">=</span><span class="n">error</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
+               <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span> <span class="n">submit</span><span class="o">=</span><span class="n">submit</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Adding arguments to job1</span>
+<span class="n">job2</span><span class="o">.</span><span class="n">add_arg</span><span class="p">(</span><span class="s1">&#39;--length 200&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;200jobname&#39;</span><span class="p">)</span>
+<span class="n">job2</span><span class="o">.</span><span class="n">add_arg</span><span class="p">(</span><span class="s1">&#39;--length 400&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;400jobname&#39;</span><span class="p">,</span> <span class="n">retry</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Setting up a PyCondor Dagman</span>
+<span class="n">subdag</span> <span class="o">=</span> <span class="n">pycondor</span><span class="o">.</span><span class="n">Dagman</span><span class="p">(</span><span class="s1">&#39;example_subdag&#39;</span><span class="p">,</span> <span class="n">submit</span><span class="o">=</span><span class="n">submit</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Add job1 to dagman</span>
+<span class="n">subdag</span><span class="o">.</span><span class="n">add_job</span><span class="p">(</span><span class="n">job1</span><span class="p">)</span>
+<span class="n">subdag</span><span class="o">.</span><span class="n">add_job</span><span class="p">(</span><span class="n">job2</span><span class="p">)</span>
+
+<span class="c1"># Setting up third PyCondor Job</span>
+<span class="n">job3</span> <span class="o">=</span> <span class="n">pycondor</span><span class="o">.</span><span class="n">Job</span><span class="p">(</span><span class="s1">&#39;examplejob3&#39;</span><span class="p">,</span> <span class="s1">&#39;savelist.py&#39;</span><span class="p">,</span>
+               <span class="n">error</span><span class="o">=</span><span class="n">error</span><span class="p">,</span> <span class="n">output</span><span class="o">=</span><span class="n">output</span><span class="p">,</span>
+               <span class="n">log</span><span class="o">=</span><span class="n">log</span><span class="p">,</span> <span class="n">submit</span><span class="o">=</span><span class="n">submit</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Adding arguments to job1</span>
+<span class="k">for</span> <span class="n">length</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">210</span><span class="p">,</span> <span class="mi">220</span><span class="p">):</span>
+    <span class="n">job3</span><span class="o">.</span><span class="n">add_arg</span><span class="p">(</span><span class="s1">&#39;--length {}&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">length</span><span class="p">))</span>
+
+<span class="c1"># Add interjob reltionship.</span>
+<span class="c1"># Ensure that the subdag is complete before job3 starts</span>
+<span class="n">subdag</span><span class="o">.</span><span class="n">add_child</span><span class="p">(</span><span class="n">job3</span><span class="p">)</span>
+
+<span class="c1"># Setting up a PyCondor Dagman</span>
+<span class="n">dagman</span> <span class="o">=</span> <span class="n">pycondor</span><span class="o">.</span><span class="n">Dagman</span><span class="p">(</span><span class="s1">&#39;exampledagman&#39;</span><span class="p">,</span> <span class="n">submit</span><span class="o">=</span><span class="n">submit</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="c1"># Add jobs to dagman</span>
+<span class="n">dagman</span><span class="o">.</span><span class="n">add_job</span><span class="p">(</span><span class="n">job3</span><span class="p">)</span>
+<span class="n">dagman</span><span class="o">.</span><span class="n">add_subdag</span><span class="p">(</span><span class="n">subdag</span><span class="p">)</span>
 <span class="c1"># Write all necessary submit files and submit job to Condor</span>
 <span class="n">dagman</span><span class="o">.</span><span class="n">build_submit</span><span class="p">()</span>
 </pre></div>
