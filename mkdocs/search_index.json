@@ -149,6 +149,66 @@
             "location": "/CHANGELOG/#version-010",
             "text": "Changes :   Adds  request_cpus  attribute to Job object to make it easier to request a specified number of CPUs.  Adds  pycondor.get_queue()  feature to get  condor_q  information.  Job and Dagman object methods now return  self .  Fixed typo in logger formatting.",
             "title": "Version 0.1.0"
+        },
+        {
+            "location": "/contributing/",
+            "text": "Contributing\n\u00b6\n\n\nPyCondor is an open source project and contributions are always welcome!\n\n\nIf you are new to working with forks, check out \nGitHub's working with forks article\n.\n\n\nStep 1: Creating a new issue\n\u00b6\n\n\n\n\nIf you don't already have a \nGitHub\n account, create one\n\n\nGo to the \nPyCondor GitHub page\n and create a new issue by clicking on the \"Issues\" tab and then the \"New issue\" button\n\n\n\n\n\n\n\n\nStep 2: Forking the repository\n\u00b6\n\n\n(If you have an existing configured fork of PyCondor, you can skip to Step 4: Syncing an existing fork)\n\n\n\n\nFrom the PyCondor repository use the \"Fork\" button to fork the project into your GitHub account\n\n\n\n\n\n\n\n\nThis forked copy of PyCondor can now be cloned to your local machine using\n\n\n\n\n$ git clone https://github.com/<your_username>/pycondor.git\n\n\n\n\n\nStep 3: Configuring a remote for a fork\n\u00b6\n\n\nFrom your cloned copy of PyCondor from the previous step, list the existing remotes with\n\n\n$ git remote -v\n\n\n\n\n\nYou'll most likely see something like\n\n\norigin  https://github.com/<your_username>/pycondor.git (fetch)\norigin  https://github.com/<your_username>/pycondor.git (push)\n\n\n\n\n\nTo add the original PyCondor project repository as a remote (named \"upstream\") to your copy of PyCondor via\n\n\n$ git remote add upstream https://github.com/jrbourbeau/pycondor.git\n`\n\n\n\n\n\n\nNow when you execute \ngit remote -v\n, the newly added upstream remote should be present\n\n\norigin  https://github.com/<your_username>/pycondor.git (fetch)\norigin  https://github.com/<your_username>/pycondor.git (push)\nupstream        https://github.com/jrbourbeau/pycondor.git (fetch)\nupstream        https://github.com/jrbourbeau/pycondor.git (push)\n\n\n\n\n\nStep 4: Syncing an existing fork\n\u00b6\n\n\nTo ensure that your existing fork is up-to-date with the original PyCondor repository, fetch the upstream commits via\n\n\n$ git fetch upstream\n\n\n\n\n\nThe output should look something like\n\n\nremote\n:\n \nCounting\n \nobjects\n:\n \nxx\n,\n \ndone\n.\n\n\nremote\n:\n \nCompressing\n \nobjects\n:\n \n100\n%\n \n(\nxx\n/\nxx\n),\n \ndone\n.\n\n\nremote\n:\n \nTotal\n \nxx\n \n(\ndelta\n \nxx\n),\n \nreused\n \nxx\n \n(\ndelta\n \nx\n)\n\n\nUnpacking\n \nobjects\n:\n \n100\n%\n \n(\nxx\n/\nxx\n),\n \ndone\n.\n\n\nFrom\n \nhttps\n:\n//github.com/jrbourbeau/pycondor\n\n \n*\n \n[\nnew\n \nbranch\n]\n      \nmaster\n     \n->\n \nupstream\n/\nmaster\n\n\n\n\n\n\nNow the commits to the master branch of jrbourbeau/pycondor are stored in your local upstream/master branch. At this point, you'll want to make sure (if you're not already) that you're on the master branch of your local repository\n\n\n$ git checkout master\nSwitched to branch \n'master'\n\n\n\n\n\n\nNow you can merge the upstream/master branch into your master branch with\n\n\n$ git merge upstream/master\n\n\n\n\n\nNow the master branch of your local copy of PyCondor should be up-to-date with the original PyCondor master branch!\n\n\nStep 5: Create a new feature branch\n\u00b6\n\n\nNext, create a new branch for the feature you would like to develop with\n\n\n$ git checkout -b <new_feature_branch_name>\n\n\n\n\n\nThe output should be\n\n\nSwitched to branch '<new_feature_branch_name>'\n\n\n\n\n\nStep 5: Develop new code!\n\u00b6\n\n\nNow add your feature, bug fix, typo fix, etc.\n\n\nStep 6: Running tests with the new code\n\u00b6\n\n\nOnce your contribution has been added, you'll want to run the tests for this project to ensure that none of the code you added broke any tests. If you haven't already, make sure you have the necessary software installed for running the tests (\npytest\n) via\n\n\npip install -r requirements-dev.txt\n\n\n\n\n\nNow the tests can be run by going to the root directory of your pycondor repository and executing\n\n\nmake tests\n\n\n\n\n\nStep 7: Documentation\n\u00b6\n\n\nIf necessary for your contribution, add the appropriate documentation to the files in the \ndocs/docs\n directory  \n\n\nStep 8: Committing and uploading changes\n\u00b6\n\n\nNow the changes you've made are ready to be committed and uploaded to GitHub. Let git know which files you would like to include in your commit via\n\n\n$ git add <modifies_files_here>\n\n\n\n\n\nand then commit your changes with\n\n\n$ git commit -m \n'<meaningful messages about the changes made>'\n\n\n\n\n\n\nNow you can push this commit from your local repository to your copy on GitHub\n\n\n$ git push origin <new_feature_branch_name>\n\n\n\n\n\nStep 10: Submitting a pull request\n\u00b6\n\n\nFinally, you can go to your copy of PyCondor on GitHub and submit a pull request by clicking the \"Compare & pull request\" button!",
+            "title": "Contributing"
+        },
+        {
+            "location": "/contributing/#contributing",
+            "text": "PyCondor is an open source project and contributions are always welcome!  If you are new to working with forks, check out  GitHub's working with forks article .",
+            "title": "Contributing"
+        },
+        {
+            "location": "/contributing/#step-1-creating-a-new-issue",
+            "text": "If you don't already have a  GitHub  account, create one  Go to the  PyCondor GitHub page  and create a new issue by clicking on the \"Issues\" tab and then the \"New issue\" button",
+            "title": "Step 1: Creating a new issue"
+        },
+        {
+            "location": "/contributing/#step-2-forking-the-repository",
+            "text": "(If you have an existing configured fork of PyCondor, you can skip to Step 4: Syncing an existing fork)   From the PyCondor repository use the \"Fork\" button to fork the project into your GitHub account     This forked copy of PyCondor can now be cloned to your local machine using   $ git clone https://github.com/<your_username>/pycondor.git",
+            "title": "Step 2: Forking the repository"
+        },
+        {
+            "location": "/contributing/#step-3-configuring-a-remote-for-a-fork",
+            "text": "From your cloned copy of PyCondor from the previous step, list the existing remotes with  $ git remote -v  You'll most likely see something like  origin  https://github.com/<your_username>/pycondor.git (fetch)\norigin  https://github.com/<your_username>/pycondor.git (push)  To add the original PyCondor project repository as a remote (named \"upstream\") to your copy of PyCondor via  $ git remote add upstream https://github.com/jrbourbeau/pycondor.git `   Now when you execute  git remote -v , the newly added upstream remote should be present  origin  https://github.com/<your_username>/pycondor.git (fetch)\norigin  https://github.com/<your_username>/pycondor.git (push)\nupstream        https://github.com/jrbourbeau/pycondor.git (fetch)\nupstream        https://github.com/jrbourbeau/pycondor.git (push)",
+            "title": "Step 3: Configuring a remote for a fork"
+        },
+        {
+            "location": "/contributing/#step-4-syncing-an-existing-fork",
+            "text": "To ensure that your existing fork is up-to-date with the original PyCondor repository, fetch the upstream commits via  $ git fetch upstream  The output should look something like  remote :   Counting   objects :   xx ,   done .  remote :   Compressing   objects :   100 %   ( xx / xx ),   done .  remote :   Total   xx   ( delta   xx ),   reused   xx   ( delta   x )  Unpacking   objects :   100 %   ( xx / xx ),   done .  From   https : //github.com/jrbourbeau/pycondor \n  *   [ new   branch ]        master       ->   upstream / master   Now the commits to the master branch of jrbourbeau/pycondor are stored in your local upstream/master branch. At this point, you'll want to make sure (if you're not already) that you're on the master branch of your local repository  $ git checkout master\nSwitched to branch  'master'   Now you can merge the upstream/master branch into your master branch with  $ git merge upstream/master  Now the master branch of your local copy of PyCondor should be up-to-date with the original PyCondor master branch!",
+            "title": "Step 4: Syncing an existing fork"
+        },
+        {
+            "location": "/contributing/#step-5-create-a-new-feature-branch",
+            "text": "Next, create a new branch for the feature you would like to develop with  $ git checkout -b <new_feature_branch_name>  The output should be  Switched to branch '<new_feature_branch_name>'",
+            "title": "Step 5: Create a new feature branch"
+        },
+        {
+            "location": "/contributing/#step-5-develop-new-code",
+            "text": "Now add your feature, bug fix, typo fix, etc.",
+            "title": "Step 5: Develop new code!"
+        },
+        {
+            "location": "/contributing/#step-6-running-tests-with-the-new-code",
+            "text": "Once your contribution has been added, you'll want to run the tests for this project to ensure that none of the code you added broke any tests. If you haven't already, make sure you have the necessary software installed for running the tests ( pytest ) via  pip install -r requirements-dev.txt  Now the tests can be run by going to the root directory of your pycondor repository and executing  make tests",
+            "title": "Step 6: Running tests with the new code"
+        },
+        {
+            "location": "/contributing/#step-7-documentation",
+            "text": "If necessary for your contribution, add the appropriate documentation to the files in the  docs/docs  directory",
+            "title": "Step 7: Documentation"
+        },
+        {
+            "location": "/contributing/#step-8-committing-and-uploading-changes",
+            "text": "Now the changes you've made are ready to be committed and uploaded to GitHub. Let git know which files you would like to include in your commit via  $ git add <modifies_files_here>  and then commit your changes with  $ git commit -m  '<meaningful messages about the changes made>'   Now you can push this commit from your local repository to your copy on GitHub  $ git push origin <new_feature_branch_name>",
+            "title": "Step 8: Committing and uploading changes"
+        },
+        {
+            "location": "/contributing/#step-10-submitting-a-pull-request",
+            "text": "Finally, you can go to your copy of PyCondor on GitHub and submit a pull request by clicking the \"Compare & pull request\" button!",
+            "title": "Step 10: Submitting a pull request"
         }
     ]
 }
